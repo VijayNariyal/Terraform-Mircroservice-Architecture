@@ -1,9 +1,14 @@
-Terraform Microservice Architecture (Azure AKS + ACR)
+# Terraform Microservice Architecture (Azure AKS + ACR)
 
-This repository contains a modular Terraform setup for deploying cloud infrastructure required for microservices on Azure Kubernetes Service (AKS) using Azure Container Registry (ACR), Virtual Networks, Network Security Groups, and Resource Groups. The structure follows environment-based deployments (Dev, Prod) and reusable Terraform modules.
+NOTE: Change the SUBSCRIPTION ID in provider.tf for your subscription id
 
-Project Structure:
+This repository contains a modular Terraform configuration for deploying cloud infrastructure required to run microservices on Azure Kubernetes Service (AKS). The solution includes Azure Container Registry (ACR), Virtual Networks (VNET), Network Security Groups (NSG), and Resource Groups (RG). The setup follows an environment-based approach (Dev, Prod) and uses fully reusable Terraform modules.
 
+---
+
+## Project Structure
+
+```
 Terraform-Microservice-Architecture/
 ├── Environments/
 │   ├── Dev/
@@ -15,7 +20,7 @@ Terraform-Microservice-Architecture/
 │   │   ├── terraform.tfstate.backup
 │   │   ├── terraform.tfvars
 │   │   └── variable.tf
-│   └── Prod/  # Production environment (to be created)
+│   └── Prod/                      # Production environment (to be added)
 ├── Modules/
 │   ├── ACR/
 │   │   ├── acr.tf
@@ -34,46 +39,81 @@ Terraform-Microservice-Architecture/
 │       ├── vnet.tf
 │       └── variable.tf
 └── README.md
+```
 
-Infrastructure Overview:
+---
 
-Resource Group (RG): Defines cloud boundary per environment.
-Virtual Network (VNET): Custom VNET with subnets for AKS, ACR, and other components.
-Network Security Group (NSG): Controls inbound/outbound traffic.
-Azure Container Registry (ACR): Stores container images for microservices, integrated with AKS via AcrPull role.
-Azure Kubernetes Service (AKS): Hosts microservices, uses SystemAssigned Managed Identity with ACR access.
+## Infrastructure Overview
 
-Deployment Steps:
+### **Resource Group (RG)**
+Defines cloud boundaries for each environment.
 
-1. Initialize Terraform:
+### **Virtual Network (VNET)**
+Provides a custom network with dedicated subnets for AKS, ACR, and additional services.
+
+### **Network Security Group (NSG)**
+Controls inbound and outbound traffic to secure the environment.
+
+### **Azure Container Registry (ACR)**
+Stores Docker images for microservices. AKS accesses ACR via the **AcrPull** role.
+
+### **Azure Kubernetes Service (AKS)**
+Primary container orchestration platform for microservices.  
+Uses **SystemAssigned Managed Identity** integrated with ACR.
+
+---
+
+## Deployment Steps
+
+### **1. Initialize Terraform**
+```sh
 terraform init
+```
 
-2. Validate Configuration:
+### **2. Validate Configuration**
+```sh
 terraform validate
+```
 
-3. Generate Execution Plan:
+### **3. Generate Execution Plan**
+```sh
 terraform plan
+```
 
-4. Apply Changes:
+### **4. Apply Infrastructure**
+```sh
 terraform apply -auto-approve
+```
 
-Connect to AKS Cluster:
+---
 
+## Connect to the AKS Cluster
+
+```sh
 az aks get-credentials -n <aks-name> -g <resource-group>
 kubectl get nodes
+```
 
-Recommended .gitignore:
+---
 
+## Recommended `.gitignore`
+
+```
 .terraform/
 *.tfstate
 *.tfstate.backup
 .terraform.lock.hcl
 crash.log
+```
 
-Future Enhancements:
+---
 
-- Add Production environment
-- Add GitHub Actions CI/CD pipeline
-- Add Helm chart templates for microservices
-- Add Ingress setup per service
-- Add Monitoring stack (Prometheus/Grafana)
+## Future Enhancements
+
+- Add Production environment  
+- Implement GitHub Actions CI/CD pipeline  
+- Add Helm chart templates for microservices  
+- Configure per-service Ingress (NGINX/AGIC)  
+- Add monitoring stack (Prometheus + Grafana)
+
+---
