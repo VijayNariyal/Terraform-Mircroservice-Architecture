@@ -1,4 +1,4 @@
-# Terraform Microservice Architecture (Azure AKS + ACR)
+Terraform Microservice Architecture (Azure AKS + ACR)
 
 This repository contains a modular Terraform setup for deploying cloud infrastructure required for microservices on Azure Kubernetes Service (AKS) using Azure Container Registry (ACR), Virtual Networks, Network Security Groups, and Resource Groups. The structure follows environment-based deployments (Dev, Prod) and reusable Terraform modules.
 
@@ -37,24 +37,27 @@ Terraform-Microservice-Architecture/
 
 Infrastructure Overview:
 
-Resource Group (RG) - Defines cloud boundary per environment.
-Virtual Network (VNET) - Custom VNET with subnets for AKS, ACR, and other components.
-Network Security Group (NSG) - Controls inbound/outbound traffic.
-Azure Container Registry (ACR) - Stores container images for microservices, integrated with AKS via AcrPull role.
-Azure Kubernetes Service (AKS) - Hosts microservices, uses SystemAssigned Managed Identity with ACR access.
+Resource Group (RG): Defines cloud boundary per environment.
+Virtual Network (VNET): Custom VNET with subnets for AKS, ACR, and other components.
+Network Security Group (NSG): Controls inbound/outbound traffic.
+Azure Container Registry (ACR): Stores container images for microservices, integrated with AKS via AcrPull role.
+Azure Kubernetes Service (AKS): Hosts microservices, uses SystemAssigned Managed Identity with ACR access.
 
 Deployment Steps:
 
 1. Initialize Terraform:
-   terraform init
-2. Validate:
-   terraform validate
-3. Plan:
-   terraform plan
-4. Apply:
-   terraform apply -auto-approve
+terraform init
 
-Connect to AKS:
+2. Validate Configuration:
+terraform validate
+
+3. Generate Execution Plan:
+terraform plan
+
+4. Apply Changes:
+terraform apply -auto-approve
+
+Connect to AKS Cluster:
 
 az aks get-credentials -n <aks-name> -g <resource-group>
 kubectl get nodes
