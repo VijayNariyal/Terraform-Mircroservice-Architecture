@@ -2,44 +2,39 @@ Terraform Microservice Architecture (Azure AKS + ACR)
 
 This repository contains a modular Terraform setup for deploying cloud infrastructure required for microservices on Azure Kubernetes Service (AKS) using Azure Container Registry (ACR), Virtual Networks, Network Security Groups, and Resource Groups. The structure follows environment-based deployments (Dev, Prod) and reusable Terraform modules.
 
+Project Structure:
+
 Terraform-Microservice-Architecture/
-│
 ├── Environments/
-│ ├── Dev/
-│ │ ├── .terraform/
-│ │ ├── .terraform.lock.hcl
-│ │ ├── main.tf
-│ │ ├── provider.tf
-│ │ ├── terraform.tfstate
-│ │ ├── terraform.tfstate.backup
-│ │ ├── terraform.tfvars
-│ │ └── variable.tf
-│ │
-│ └── Prod/ # Production environment (to be created)
-│
+│   ├── Dev/
+│   │   ├── .terraform/
+│   │   ├── .terraform.lock.hcl
+│   │   ├── main.tf
+│   │   ├── provider.tf
+│   │   ├── terraform.tfstate
+│   │   ├── terraform.tfstate.backup
+│   │   ├── terraform.tfvars
+│   │   └── variable.tf
+│   └── Prod/  # Production environment (to be created)
 ├── Modules/
-│ ├── ACR/
-│ │ ├── acr.tf
-│ │ └── variable.tf
-│ │
-│ ├── AKS/
-│ │ ├── aks.tf
-│ │ └── variable.tf
-│ │
-│ ├── NSG/
-│ │ ├── data.tf
-│ │ ├── nsg.tf
-│ │ └── variable.tf
-│ │
-│ ├── RG/
-│ │ ├── main.tf
-│ │ └── variable.tf
-│ │
-│ └── VNET/
-│ ├── vnet.tf
-│ └── variable.tf
-│
+│   ├── ACR/
+│   │   ├── acr.tf
+│   │   └── variable.tf
+│   ├── AKS/
+│   │   ├── aks.tf
+│   │   └── variable.tf
+│   ├── NSG/
+│   │   ├── data.tf
+│   │   ├── nsg.tf
+│   │   └── variable.tf
+│   ├── RG/
+│   │   ├── main.tf
+│   │   └── variable.tf
+│   └── VNET/
+│       ├── vnet.tf
+│       └── variable.tf
 └── README.md
+
 Infrastructure Overview:
 
 Resource Group (RG): Defines cloud boundary per environment.
